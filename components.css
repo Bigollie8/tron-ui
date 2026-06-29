@@ -1,0 +1,653 @@
+/* tron-ui components.css — .tron-* class library (extracted from TheGrid) */
+
+/* ═══════════════════════════════════════════════════════════════
+   TRON CARD SYSTEM — The primary surface element
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-card {
+  position: relative;
+  background: var(--bg-card);
+  border: var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.tron-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--accent-primary-rgb), 0.15),
+    transparent 40%,
+    transparent 60%,
+    rgba(var(--accent-primary-rgb), 0.08)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+  opacity: 0;
+}
+
+.tron-card:hover {
+  border-color: rgba(var(--accent-primary-rgb), 0.25);
+  box-shadow: 0 0 20px rgba(var(--accent-primary-rgb), 0.06), inset 0 1px 0 rgba(var(--accent-primary-rgb), 0.05);
+  background: var(--bg-card-hover);
+}
+
+.tron-card:hover::before {
+  opacity: 1;
+}
+
+/* Card with corner brackets — the signature TRON look */
+.tron-card-bracketed {
+  position: relative;
+  background: var(--bg-card);
+  border: none;
+  border-radius: 0;
+  padding: 24px;
+  transition: box-shadow var(--transition-fast);
+}
+
+.tron-card-bracketed::before,
+.tron-card-bracketed::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: rgba(var(--accent-primary-rgb), 0.3);
+  border-style: solid;
+  transition: border-color var(--transition-fast), width var(--transition-fast), height var(--transition-fast);
+}
+
+.tron-card-bracketed::before {
+  top: 0;
+  left: 0;
+  border-width: 1px 0 0 1px;
+}
+
+.tron-card-bracketed::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 1px 1px 0;
+}
+
+.tron-card-bracketed:hover::before,
+.tron-card-bracketed:hover::after {
+  border-color: var(--accent-primary);
+  width: 24px;
+  height: 24px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TRON BUTTON SYSTEM
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.3);
+  border-radius: var(--radius-sm);
+  background: rgba(var(--accent-primary-rgb), 0.06);
+  color: var(--accent-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+}
+
+.tron-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--accent-primary-rgb), 0.1),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.tron-btn:hover {
+  border-color: var(--accent-primary);
+  background: rgba(var(--accent-primary-rgb), 0.12);
+  box-shadow: var(--glow-primary), inset 0 0 20px rgba(var(--accent-primary-rgb), 0.05);
+  color: var(--accent-primary-light);
+}
+
+.tron-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.tron-btn:active {
+  transform: scale(0.98);
+  box-shadow: var(--glow-primary-strong);
+}
+
+.tron-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.tron-btn:disabled:hover::before {
+  transform: translateX(-100%);
+}
+
+.tron-btn-secondary {
+  border-color: rgba(var(--accent-primary-rgb), 0.15);
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.tron-btn-secondary:hover {
+  border-color: rgba(var(--accent-primary-rgb), 0.3);
+  background: rgba(var(--accent-primary-rgb), 0.05);
+  color: var(--accent-primary);
+}
+
+.tron-btn-ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.tron-btn-ghost:hover {
+  background: rgba(var(--accent-primary-rgb), 0.06);
+  color: var(--accent-primary);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.tron-btn-danger {
+  border-color: rgba(255, 23, 68, 0.3);
+  background: rgba(255, 23, 68, 0.06);
+  color: #ff1744;
+}
+
+.tron-btn-danger:hover {
+  border-color: #ff1744;
+  background: rgba(255, 23, 68, 0.12);
+  box-shadow: 0 0 8px rgba(255, 23, 68, 0.2), 0 0 20px rgba(255, 23, 68, 0.1);
+  color: #ff4466;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TRON INPUT SYSTEM
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.08);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.tron-input::placeholder {
+  color: var(--text-muted);
+}
+
+.tron-input:focus {
+  border-color: rgba(var(--accent-primary-rgb), 0.4);
+  box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.06), var(--glow-primary);
+}
+
+.tron-input:hover:not(:focus) {
+  border-color: rgba(var(--accent-primary-rgb), 0.15);
+}
+
+/* Select styling */
+.tron-select {
+  padding: 8px 32px 8px 12px;
+  background: var(--bg-input);
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.08);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234a6478'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.tron-select:focus {
+  border-color: rgba(var(--accent-primary-rgb), 0.4);
+  box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.06);
+}
+
+.tron-select:hover:not(:focus) {
+  border-color: rgba(var(--accent-primary-rgb), 0.15);
+}
+
+.tron-select option {
+  background: var(--bg-card-solid);
+  color: var(--text-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TRON TAB BAR — Consistent across all pages
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid rgba(var(--accent-primary-rgb), 0.1);
+  margin-bottom: 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tron-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.tron-tab {
+  position: relative;
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tron-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-primary);
+  transform: scaleX(0);
+  transition: transform var(--transition-fast);
+  box-shadow: 0 0 8px rgba(var(--accent-primary-rgb), 0.4);
+}
+
+.tron-tab:hover {
+  color: var(--text-secondary);
+}
+
+.tron-tab[data-active="true"],
+.tron-tab.active {
+  color: var(--accent-primary);
+}
+
+.tron-tab[data-active="true"]::after,
+.tron-tab.active::after {
+  transform: scaleX(1);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE HEADER — Consistent across all pages
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tron-page-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: var(--glow-primary-text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.tron-page-subtitle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 4px 0 0;
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STATUS INDICATORS
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-success);
+  box-shadow: 0 0 6px var(--status-success);
+  animation: tron-breathe 3s ease-in-out infinite;
+}
+
+.tron-status-dot--warning {
+  background: var(--status-warning);
+  box-shadow: 0 0 6px var(--status-warning);
+}
+
+.tron-status-dot--error {
+  background: var(--status-error);
+  box-shadow: 0 0 6px var(--status-error);
+  animation: tron-breathe-fast 1.5s ease-in-out infinite;
+}
+
+.tron-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  background: rgba(var(--accent-primary-rgb), 0.1);
+  color: var(--accent-primary);
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.2);
+}
+
+.tron-badge--warning {
+  background: rgba(255, 184, 0, 0.1);
+  color: #ffb800;
+  border-color: rgba(255, 184, 0, 0.2);
+}
+
+.tron-badge--danger {
+  background: rgba(255, 23, 68, 0.1);
+  color: #ff1744;
+  border-color: rgba(255, 23, 68, 0.2);
+}
+
+.tron-badge--success {
+  background: rgba(0, 230, 118, 0.1);
+  color: #00e676;
+  border-color: rgba(0, 230, 118, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION LABEL — Used as widget/section headers
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-section-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.tron-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--accent-primary-rgb), 0.2), transparent);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DIVIDER — Horizontal rule with TRON styling
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--accent-primary-rgb), 0.15) 20%,
+    rgba(var(--accent-primary-rgb), 0.15) 80%,
+    transparent
+  );
+  margin: 16px 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes tron-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes tron-breathe-fast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes tron-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes tron-glow-pulse {
+  0%, 100% { box-shadow: var(--glow-primary); }
+  50% { box-shadow: var(--glow-primary-strong); }
+}
+
+@keyframes tron-slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes tron-slide-in-left {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes tron-slide-up {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes tron-slide-up-sheet {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes tron-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes tron-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes tron-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes tron-energy-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes tron-border-trace {
+  0% { stroke-dashoffset: 1000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* Legacy aliases for existing code */
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes slideInLeft { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUpSheet { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ═══════════════════════════════════════════════════════════════
+   SKELETON LOADING
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-input) 0%,
+    rgba(var(--accent-primary-rgb), 0.06) 50%,
+    var(--bg-input) 100%
+  );
+  background-size: 200% 100%;
+  animation: tron-shimmer 2s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tron-text-glow {
+  text-shadow: var(--glow-primary-text);
+}
+
+.tron-border-glow {
+  box-shadow: var(--glow-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TRON MARKDOWN (chat bubbles, AI content)
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-md h1, .tron-md h2, .tron-md h3 {
+  font-family: var(--font-display);
+  color: var(--accent-primary);
+  margin: 0.5em 0 0.25em;
+  line-height: 1.3;
+}
+.tron-md h1 { font-size: 1.1em; }
+.tron-md h2 { font-size: 1em; }
+.tron-md h3 { font-size: 0.95em; }
+.tron-md p { margin: 0.35em 0; }
+.tron-md ul, .tron-md ol {
+  margin: 0.35em 0;
+  padding-left: 1.4em;
+}
+.tron-md li { margin: 0.15em 0; }
+.tron-md li::marker {
+  color: rgba(var(--accent-primary-rgb), 0.4);
+}
+.tron-md strong { color: var(--accent-primary-light); }
+.tron-md em { color: var(--text-secondary); font-style: italic; }
+.tron-md hr {
+  border: none;
+  border-top: 1px solid rgba(var(--accent-primary-rgb), 0.1);
+  margin: 0.5em 0;
+}
+.tron-md code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgba(var(--accent-primary-rgb), 0.06);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.1);
+}
+.tron-md pre {
+  background: var(--bg-input);
+  padding: 0.75em;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  margin: 0.35em 0;
+  max-width: 100%;
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.08);
+}
+.tron-md pre code { background: none; padding: 0; border: none; }
+.tron-md > *:first-child { margin-top: 0; }
+.tron-md > *:last-child { margin-bottom: 0; }
+.tron-md {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GRID PERSPECTIVE BACKGROUND
+   For dashboard and full-page backgrounds
+   ═══════════════════════════════════════════════════════════════ */
+
+.tron-grid-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  perspective: 400px;
+}
+
+.tron-grid-bg::before {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  background-image:
+    linear-gradient(rgba(var(--accent-primary-rgb), var(--grid-opacity)) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-primary-rgb), var(--grid-opacity)) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: rotateX(60deg);
+  transform-origin: top center;
+}
+
+.tron-grid-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    transparent 0%,
+    var(--bg-primary) 70%
+  );
+}
