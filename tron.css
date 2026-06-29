@@ -1,0 +1,145 @@
+/* ═══════════════════════════════════════════════════════════════
+   tron-ui — TRON Design Tokens
+   Single source of truth, extracted from TheGrid frontend/src/index.css.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── TRON: Legacy Theme (Default) ─── */
+:root[data-theme="legacy"] {
+  --bg-primary: #050a0e;
+  --bg-secondary: #0a1014;
+  --bg-tertiary: #0d1520;
+  --bg-card: rgba(8, 16, 24, 0.85);
+  --bg-card-hover: rgba(12, 22, 32, 0.95);
+  --bg-card-solid: #081018;
+  --bg-input: #0a1218;
+  --bg-elevated: rgba(0, 212, 255, 0.04);
+
+  --accent-primary: #00d4ff;
+  --accent-primary-rgb: 0, 212, 255;
+  --accent-primary-light: #6fecff;
+  --accent-primary-dim: rgba(0, 212, 255, 0.1);
+  --accent-primary-ghost: rgba(0, 212, 255, 0.04);
+  --accent-secondary: #ff6100;
+  --accent-secondary-rgb: 255, 97, 0;
+  --accent-secondary-light: #ffb800;
+
+  --text-primary: #e8f0f4;
+  --text-secondary: #8aa4b8;
+  --text-muted: #4a6478;
+
+  --priority-critical: #ff1744;
+  --priority-high: #ff6100;
+  --priority-medium: #ffb800;
+  --priority-low: #00d4ff;
+
+  --status-success: #00e676;
+  --status-warning: #ffb800;
+  --status-error: #ff1744;
+
+  --glow-primary: 0 0 8px rgba(0, 212, 255, 0.2), 0 0 20px rgba(0, 212, 255, 0.1);
+  --glow-primary-strong: 0 0 12px rgba(0, 212, 255, 0.4), 0 0 30px rgba(0, 212, 255, 0.15), 0 0 60px rgba(0, 212, 255, 0.05);
+  --glow-primary-text: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 30px rgba(0, 212, 255, 0.2);
+  --glow-secondary: 0 0 8px rgba(255, 97, 0, 0.2), 0 0 20px rgba(255, 97, 0, 0.1);
+
+  --border-subtle: 1px solid rgba(0, 212, 255, 0.08);
+  --border-card: 1px solid rgba(0, 212, 255, 0.12);
+  --border-active: 1px solid rgba(0, 212, 255, 0.4);
+  --border-glow: 1px solid rgba(0, 212, 255, 0.25);
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Orbitron', sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  --sidebar-width: 240px;
+  --topbar-height: 52px;
+
+  --noise-opacity: 0.015;
+  --scanline-opacity: 0.03;
+  --grid-opacity: 0.04;
+}
+
+/* ─── TRON: Original Theme ─── */
+:root[data-theme="original"] {
+  --bg-primary: #000000;
+  --bg-secondary: #050508;
+  --bg-tertiary: #0a0a10;
+  --bg-card: rgba(5, 5, 12, 0.9);
+  --bg-card-hover: rgba(8, 8, 18, 0.98);
+  --bg-card-solid: #050508;
+  --bg-input: #08080f;
+  --bg-elevated: rgba(0, 128, 255, 0.04);
+
+  --accent-primary: #0080ff;
+  --accent-primary-rgb: 0, 128, 255;
+  --accent-primary-light: #40a0ff;
+  --accent-primary-dim: rgba(0, 128, 255, 0.1);
+  --accent-primary-ghost: rgba(0, 128, 255, 0.04);
+  --accent-secondary: #ff0000;
+  --accent-secondary-rgb: 255, 0, 0;
+  --accent-secondary-light: #ff4444;
+
+  --text-primary: #e0e0ee;
+  --text-secondary: #8888aa;
+  --text-muted: #555570;
+
+  --priority-critical: #ff1744;
+  --priority-high: #ff0000;
+  --priority-medium: #ffb800;
+  --priority-low: #0080ff;
+
+  --status-success: #00e676;
+  --status-warning: #ffb800;
+  --status-error: #ff1744;
+
+  --glow-primary: 0 0 8px rgba(0, 128, 255, 0.25), 0 0 20px rgba(0, 128, 255, 0.1);
+  --glow-primary-strong: 0 0 12px rgba(0, 128, 255, 0.5), 0 0 30px rgba(0, 128, 255, 0.2), 0 0 60px rgba(0, 128, 255, 0.05);
+  --glow-primary-text: 0 0 10px rgba(0, 128, 255, 0.6), 0 0 30px rgba(0, 128, 255, 0.25);
+  --glow-secondary: 0 0 8px rgba(255, 0, 0, 0.25), 0 0 20px rgba(255, 0, 0, 0.1);
+
+  --border-subtle: 1px solid rgba(0, 128, 255, 0.1);
+  --border-card: 1px solid rgba(0, 128, 255, 0.15);
+  --border-active: 1px solid rgba(0, 128, 255, 0.5);
+  --border-glow: 1px solid rgba(0, 128, 255, 0.3);
+
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Orbitron', monospace;
+  --font-body: 'Inter', -apple-system, sans-serif;
+
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  --sidebar-width: 240px;
+  --topbar-height: 52px;
+
+  --noise-opacity: 0.02;
+  --scanline-opacity: 0.04;
+  --grid-opacity: 0.05;
+}
+
+/* ─── High-contrast accessibility overrides ─── */
+[data-high-contrast="true"] {
+  --bg-card: #1a1a1a;
+  --border-card: 2px solid var(--accent-primary);
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.3);
+  --text-secondary: #d0d0d0;
+  --text-muted: #b0b0b0;
+  --glow-primary: none;
+  --glow-primary-strong: none;
+  --glow-secondary: none;
+  --glow-primary-text: none;
+  --scanline-opacity: 0;
+  --noise-opacity: 0;
+}
