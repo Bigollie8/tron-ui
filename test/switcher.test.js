@@ -46,3 +46,12 @@ test('sets _loaded only after successful render, not before fetch', () => {
     '_loaded = true must appear after _render call in source'
   );
 });
+
+test('renders Grid Home fallback when all apps are filtered out', () => {
+  assert.match(src, /No other apps/);
+  assert.match(src, /No other apps[^<]*<a href/);
+});
+
+test('deduplicates concurrent registry fetches with an in-flight guard', () => {
+  assert.match(src, /_loading/);
+});

@@ -55,20 +55,21 @@
 
   class GridSwitcher extends HTMLElement {
     connectedCallback() {
-      if (this.shadowRoot) return;
-      const root = this.attachShadow({ mode: 'open' });
-      const pos = this.getAttribute('position') === 'bottom-left' ? 'left' : 'right';
-      root.innerHTML = `
-        <style>${STYLE}</style>
-        <button class="fab ${pos}" aria-label="Open app switcher" title="The Grid">${GRID_GLYPH}</button>
-        <div class="overlay" role="dialog" aria-label="Apps"><div class="panel"></div></div>
-      `;
-      this._overlay = root.querySelector('.overlay');
-      this._panel = root.querySelector('.panel');
-      this._loaded = false;
-      root.querySelector('.fab').addEventListener('click', () => this._toggle());
-      this._overlay.addEventListener('click', (e) => { if (e.target === this._overlay) this._toggle(false); });
-      this._onKey = (e) => { if (e.key === 'Escape') this._toggle(false); };
+      if (!this.shadowRoot) {
+        const root = this.attachShadow({ mode: 'open' });
+        const pos = this.getAttribute('position') === 'bottom-left' ? 'left' : 'right';
+        root.innerHTML = `
+          <style>${STYLE}</style>
+          <button class="fab ${pos}" aria-label="Open app switcher" title="The Grid">${GRID_GLYPH}</button>
+          <div class="overlay" role="dialog" aria-label="Apps"><div class="panel"></div></div>
+        `;
+        this._overlay = root.querySelector('.overlay');
+        this._panel = root.querySelector('.panel');
+        this._loaded = false;
+        root.querySelector('.fab').addEventListener('click', () => this._toggle());
+        this._overlay.addEventListener('click', (e) => { if (e.target === this._overlay) this._toggle(false); });
+      }
+      this._onKey ??= (e) => { if (e.key === 'Escape') this._toggle(false); };
       document.addEventListener('keydown', this._onKey);
     }
 
@@ -81,6 +82,8 @@
     }
 
     async _load() {
+      if (this._loading) return;
+      this._loading = true;
       const url = this.getAttribute('registry') || DEFAULT_REGISTRY;
       try {
         const res = await fetch(url, { credentials: 'include' });
@@ -90,6 +93,8 @@
         this._loaded = true;
       } catch {
         this._panel.innerHTML = `<p class="fallback">Registry unreachable — <a href="${HOME_URL}">Grid Home</a></p>`;
+      } finally {
+        this._loading = false;
       }
     }
 
@@ -98,6 +103,11 @@
       const filtered = apps.filter((a) => {
         try { return new URL(a.href).hostname !== current; } catch { return true; }
       });
+
+      if (filtered.length === 0) {
+        this._panel.innerHTML = `<p class="fallback">No other apps for your account — <a href="${HOME_URL}">Grid Home</a></p>`;
+        return;
+      }
 
       this._panel.innerHTML = '<h2 class="title">The Grid</h2>';
       const grid = document.createElement('div');

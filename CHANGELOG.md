@@ -1,5 +1,9 @@
 # Changelog
 
+## v3.0.1 — 2026-07-03
+- Empty filtered app list renders the Grid Home fallback instead of a bare overlay.
+- Escape-key handling survives element reconnection; concurrent registry fetches deduplicated.
+
 ## v3.0.0 — 2026-07-03
 - New: `switcher.js` — `<grid-switcher>` web component (corner glyph → app overlay, fed by the launchpad registry, Authentik cookie auth). Import via `tron-ui/switcher.js` or a `<script type="module">` tag.
 - Registry data is sanitized (DOM construction, http/https-only hrefs); failed registry fetches retry on next open.

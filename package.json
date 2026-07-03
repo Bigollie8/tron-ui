@@ -1,6 +1,6 @@
 {
   "name": "tron-ui",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Shared TRON design tokens for the basedsecurity.net app ecosystem",
   "type": "module",
   "exports": {
