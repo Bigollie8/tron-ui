@@ -1,6 +1,6 @@
 {
   "name": "tron-ui",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Shared TRON design tokens for the basedsecurity.net app ecosystem",
   "type": "module",
   "exports": {
@@ -10,13 +10,8 @@
     "./components.css": "./components.css",
     "./switcher.js": "./switcher.js"
   },
-  "files": ["tron.css", "fonts.css", "base.css", "components.css", "switcher.js", "README.md"],
+  "files": ["tron.css", "fonts.css", "fonts", "base.css", "components.css", "switcher.js", "README.md"],
   "scripts": {
     "test": "node --test"
-  },
-  "dependencies": {
-    "@fontsource/inter": "^5.0.0",
-    "@fontsource/jetbrains-mono": "^5.0.0",
-    "@fontsource/orbitron": "^5.0.0"
   }
 }

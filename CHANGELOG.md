@@ -1,5 +1,8 @@
 # Changelog
 
+## v3.1.0 — 2026-07-03
+- Self-contained fonts: vendored woff2 + @font-face (fonts.css now works served raw from the assets host, not only via a bundler). Dropped @fontsource dependencies.
+
 ## v3.0.1 — 2026-07-03
 - Empty filtered app list renders the Grid Home fallback instead of a bare overlay.
 - Escape-key handling survives element reconnection; concurrent registry fetches deduplicated.
