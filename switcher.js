@@ -81,13 +81,13 @@
     }
 
     async _load() {
-      this._loaded = true;
       const url = this.getAttribute('registry') || DEFAULT_REGISTRY;
       try {
         const res = await fetch(url, { credentials: 'include' });
         if (!res.ok) throw new Error(`registry ${res.status}`);
         const data = await res.json();
         this._render(data.apps || []);
+        this._loaded = true;
       } catch {
         this._panel.innerHTML = `<p class="fallback">Registry unreachable — <a href="${HOME_URL}">Grid Home</a></p>`;
       }
@@ -95,15 +95,41 @@
 
     _render(apps) {
       const current = location.hostname;
-      const tiles = apps
-        .filter((a) => { try { return new URL(a.href).hostname !== current; } catch { return true; } })
-        .map((a) => `
-          <a class="app" href="${a.href}">
-            <span class="dot" style="background:${a.color || 'var(--accent-primary, #00d4ff)'}"></span>
-            <span class="name">${a.name}</span>
-          </a>`)
-        .join('');
-      this._panel.innerHTML = `<h2 class="title">The Grid</h2><div class="grid">${tiles}</div>`;
+      const filtered = apps.filter((a) => {
+        try { return new URL(a.href).hostname !== current; } catch { return true; }
+      });
+
+      this._panel.innerHTML = '<h2 class="title">The Grid</h2>';
+      const grid = document.createElement('div');
+      grid.className = 'grid';
+
+      for (const a of filtered) {
+        let safeHref = null;
+        try {
+          const parsed = new URL(a.href);
+          if (parsed.protocol === 'http:' || parsed.protocol === 'https:') safeHref = a.href;
+        } catch { /* skip unparseable URLs */ }
+        if (!safeHref) continue;
+
+        const link = document.createElement('a');
+        link.className = 'app';
+        link.href = safeHref;
+
+        const dot = document.createElement('span');
+        dot.className = 'dot';
+        dot.style.background = /^#[0-9a-fA-F]{3,8}$/.test(a.color)
+          ? a.color : 'var(--accent-primary, #00d4ff)';
+
+        const name = document.createElement('span');
+        name.className = 'name';
+        name.textContent = a.name;
+
+        link.appendChild(dot);
+        link.appendChild(name);
+        grid.appendChild(link);
+      }
+
+      this._panel.appendChild(grid);
     }
   }
 

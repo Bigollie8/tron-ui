@@ -32,3 +32,17 @@ test('has no framework imports (must run in plain HTML pages)', () => {
   assert.doesNotMatch(src, /^import\s/m);
   assert.doesNotMatch(src, /require\(/);
 });
+
+test('validates href URL protocol before assigning to link (http/https only)', () => {
+  assert.match(src, /protocol\s*===\s*['"]https?:/);
+});
+
+test('sets _loaded only after successful render, not before fetch', () => {
+  // _loaded must not appear at the start of _load before the fetch call
+  assert.doesNotMatch(src, /_load\(\)\s*\{[^}]{0,60}this\._loaded\s*=\s*true/s);
+  // _loaded must be set somewhere after _render in the file
+  assert.ok(
+    src.indexOf('this._loaded = true') > src.indexOf('this._render('),
+    '_loaded = true must appear after _render call in source'
+  );
+});
